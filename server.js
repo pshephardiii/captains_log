@@ -64,6 +64,17 @@ app.post('/logs', async (req, res) => {
 
 // SHOW
 
+app.get('/logs/:id', async (req, res) => {
+  try {
+    const foundLog = await Log.findOne({_id: req.params.id})
+    res.render('logs/Show', {
+      log: foundLog
+    })
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`Port at ${PORT} is working`)
 })

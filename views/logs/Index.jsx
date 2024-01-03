@@ -9,7 +9,7 @@ function Index(props) {
         {
           props.logs.map((log) => {
             <li key={log._id}>
-              <a href={`/logs/${log._id}`}>{log.name}</a>
+              <a href={`/logs/${log._id}`}>{log.title}</a>
             </li>
           })
         }
