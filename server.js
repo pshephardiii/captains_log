@@ -35,6 +35,10 @@ app.get('/logs', async (req, res) => {
 
 // NEW
 
+app.get('/logs/new', (req, res) => {
+  res.render('logs/New')
+})
+
 // DELETE
 
 // UPDATE
