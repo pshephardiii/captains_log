@@ -25,7 +25,7 @@ mongoose.connection.once('open', () => {
 
 app.get('/logs', async (req, res) => {
   try {
-    const foundLogs = await Logs.find({})
+    const foundLogs = await Log.find({})
     res.render('logs/Index', {
       logs: foundLogs
     })
@@ -46,23 +46,15 @@ app.get('/logs/new', (req, res) => {
 
 // CREATE
 
-// app.post('/logs', async (req, res) => {
-//   if (req.body.shipIsBroken === 'on') {
-//     req.body.shipIsBroken = true
-//   } else {
-//     req.body.shipIsBroken = false
-//   }
-//   try {
-//     const createdLog = await Log.create(req.body)
-//     res.redirect(`/logs/${createdLog._id}`)
-//   } catch(error){
-//     res.status(400).send({message: error.message})
-//   }
-// })
-
 app.post('/logs', async (req, res) => {
+  if (req.body.shipIsBroken === 'on') {
+    req.body.shipIsBroken = true
+  } else {
+    req.body.shipIsBroken = false
+  }
   try {
-    res.send(req.body)
+    const createdLog = await Log.create(req.body)
+    res.redirect(`/logs/${createdLog._id}`)
   } catch(error){
     res.status(400).send({message: error.message})
   }
