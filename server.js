@@ -42,6 +42,16 @@ app.get('/logs/new', (req, res) => {
 
 // DELETE
 
+app.delete('/logs/:id', async (req, res) => {
+  try {
+    await Log.findOneAndDelete({'_id': req.params.id}).then(() => {
+      res.redirect('/logs')
+    })
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+})
+
 // UPDATE
 
 // CREATE
