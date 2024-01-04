@@ -72,6 +72,17 @@ app.post('/logs', async (req, res) => {
 
 // EDIT
 
+app.get('/logs/:id/edit', async (req, res) => {
+  try {
+    const foundLog = await Log.findOne({'_id': req.params.id})
+    res.render('logs/Edit', {
+      log: foundLog
+    })
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+})
+
 // SHOW
 
 app.get('/logs/:id', async (req, res) => {
